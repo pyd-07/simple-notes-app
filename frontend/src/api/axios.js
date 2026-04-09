@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({
-    baseURL: "http://localhost:8080/api",
+    baseURL: "https://simple-notes-app-a7ru.onrender.com/api",
     withCredentials: true
 })
 export default instance

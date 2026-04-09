@@ -9,7 +9,11 @@ import { User, Notes } from "./db.js"
 import authMiddleware from "./middleware.js"
 
 const app = express()
-app.use(cors({}))
+app.use(cors({
+    origin: "*",
+    methods: ["GET","POST","PATCH","DELETE"],
+    credentials: true
+}))
 
 app.use(express.json())
 app.use(cookieParser())
