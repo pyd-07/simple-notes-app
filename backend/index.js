@@ -10,12 +10,8 @@ import authMiddleware from "./middleware.js"
 
 const app = express()
 
-const allowedOrigins = [
-    "https://simple-notes-app-tau-ten.vercel.app/",
-    "http://localhost:5173/"
-]
 app.use(cors({
-    origin: allowedOrigins,
+    origin: process.env.ENVIRONMENT ==="production" ? "https://simple-notes-app-tau-ten.vercel.app/" : "http://localhost:5173/",
     methods: ["GET","POST","PATCH","DELETE"],
     credentials: true
 }))
