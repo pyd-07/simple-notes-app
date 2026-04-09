@@ -2,12 +2,15 @@ import express from "express"
 import bcrypt from "bcryptjs"
 import cookieParser from "cookie-parser"
 import jwt from "jsonwebtoken"
+import cors from "cors"
 import { signInObject, signUpObject, createnotesObject, updateNotesObject } from "./schema.js"
 import connectDB from "./db.js"
 import { User, Notes } from "./db.js"
 import authMiddleware from "./middleware.js"
 
 const app = express()
+app.use(cors({}))
+
 app.use(express.json())
 app.use(cookieParser())
 
@@ -48,7 +51,7 @@ app.post("/api/v1/signup", async (req, res)=>{
         maxAge: 7*24*60*60*1000, // 7 days
         httpOnly: true,
         secure: process.env.ENVIRONMENT === "production",
-        sameSite: "lax"
+        sameSite: process.env.ENVIRONMENT==="production" ? "none" : "lax"
     })
 
     res.status(200).json({
@@ -91,7 +94,7 @@ app.post("/api/v1/signin", async (req, res)=>{
         maxAge: 7*24*60*60*1000, // 7 days
         httpOnly: true,
         secure: process.env.ENVIRONMENT === "production",
-        sameSite: "lax"
+        sameSite: process.env.ENVIRONMENT==="production" ? "none" : "lax"
     })
 
     res.status(200).json({
