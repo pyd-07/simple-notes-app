@@ -11,7 +11,7 @@ import authMiddleware from "./middleware.js"
 const app = express()
 
 app.use(cors({
-    origin: process.env.ENVIRONMENT ==="production" ? "https://simple-notes-app-tau-ten.vercel.app/" : "http://localhost:5173/",
+    origin: process.env.ENVIRONMENT ==="production" ? "https://simple-notes-app-tau-ten.vercel.app" : "http://localhost:5173",
     methods: ["GET","POST","PATCH","DELETE"],
     credentials: true
 }))
