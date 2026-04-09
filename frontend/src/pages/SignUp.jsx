@@ -20,7 +20,7 @@ export default function SignUp(){
                 return
             }
             await signUpUser({name, email, password})
-            navigate("/")
+            navigate("/notes")
         } catch (err) {
             console.log(err)
         }

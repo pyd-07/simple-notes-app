@@ -13,4 +13,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Set the limit to 1000 kB (1MB)
+    chunkSizeWarningLimit: 1000,
+  },
 })

@@ -9,8 +9,13 @@ import { User, Notes } from "./db.js"
 import authMiddleware from "./middleware.js"
 
 const app = express()
+
+const allowedOrigins = [
+    "https://simple-notes-app-tau-ten.vercel.app/",
+    "http://localhost:5173/"
+]
 app.use(cors({
-    origin: "*",
+    origin: allowedOrigins,
     methods: ["GET","POST","PATCH","DELETE"],
     credentials: true
 }))
@@ -54,8 +59,8 @@ app.post("/api/v1/signup", async (req, res)=>{
     res.cookie("sessionID", token, {
         maxAge: 7*24*60*60*1000, // 7 days
         httpOnly: true,
-        secure: process.env.ENVIRONMENT === "production",
-        sameSite: process.env.ENVIRONMENT==="production" ? "none" : "lax"
+        secure: true,
+        sameSite: "none"
     })
 
     res.status(200).json({
@@ -97,8 +102,8 @@ app.post("/api/v1/signin", async (req, res)=>{
     res.cookie("sessionID", token, {
         maxAge: 7*24*60*60*1000, // 7 days
         httpOnly: true,
-        secure: process.env.ENVIRONMENT === "production",
-        sameSite: process.env.ENVIRONMENT==="production" ? "none" : "lax"
+        secure: true,
+        sameSite: "none" 
     })
 
     res.status(200).json({

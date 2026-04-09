@@ -65,7 +65,7 @@ export default function SignIn(){
                         </Stack>
                     </Card.Body>
                     <Card.Footer justifyContent="flex-end">
-                        <Link to={"/signup"}>
+                        <Link to={"/"}>
                             <Button variant="outline">
                                 Sign Up
                             </Button>
