@@ -11,7 +11,7 @@ import authMiddleware from "./middleware.js"
 const app = express()
 
 app.use(cors({
-    origin: process.env.ENVIRONMENT ==="production" ? "https://simple-notes-app-tau-ten.vercel.app" : "http://localhost:5173",
+    origin: process.env.ENVIRONMENT==="production" ? process.env.FRONTEND_URL : "http://localhost:5173",
     methods: ["GET","POST","PATCH","DELETE"],
     credentials: true
 }))
@@ -55,8 +55,8 @@ app.post("/api/v1/signup", async (req, res)=>{
     res.cookie("sessionID", token, {
         maxAge: 7*24*60*60*1000, // 7 days
         httpOnly: true,
-        secure: true,
-        sameSite: "none"
+        secure: process.env.ENVIRONMENT==="production",
+        sameSite: process.env.ENVIRONMENT==="production" ? "none" : "lax"
     })
 
     res.status(200).json({
@@ -98,8 +98,8 @@ app.post("/api/v1/signin", async (req, res)=>{
     res.cookie("sessionID", token, {
         maxAge: 7*24*60*60*1000, // 7 days
         httpOnly: true,
-        secure: true,
-        sameSite: "none" 
+        secure: process.env.ENVIRONMENT==="production",
+        sameSite: process.env.ENVIRONMENT==="production" ? "none" : "lax" 
     })
 
     res.status(200).json({

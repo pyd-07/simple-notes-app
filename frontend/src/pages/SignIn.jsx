@@ -19,8 +19,9 @@ export default function SignIn(){
                 return
             }
             await signInUser({email, password})
-            navigate("/")
+            navigate("/notes")
         } catch (err) {
+            alert(err)
             console.log(err)
         }
     }
